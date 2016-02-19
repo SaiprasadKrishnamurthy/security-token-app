@@ -1,0 +1,29 @@
+{
+  "fieldMatchRules": [
+    {
+      "sourceFieldName": "FirstName",
+      "sourceSearchMode": "FUZZY",
+      "scoringAlgorithm": "ARITHMETIC_MEAN",
+      "rules": [
+        {
+          "precondition": null,
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName",
+          "targetSearchMode": "NGRAM",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        },
+        {
+          "precondition": null,
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName",
+          "targetSearchMode": "DISTANCE",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        }
+      ]
+    }
+  ]
+}

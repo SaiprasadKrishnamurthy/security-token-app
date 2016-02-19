@@ -1,0 +1,48 @@
+{
+  "explain": true,
+  "from": 0,
+  "size": 50,
+  "query": {
+    "filtered": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "constant_score": {
+                "query": {
+                  "fuzzy": {
+                    "FirstName_DISTANCE": {
+                      "min_similarity": 0.1,
+                      "value": "sai kris",
+                      "prefix_length": 2
+                    }
+                  }
+                },
+                "boost": 100.0
+              }
+            },
+            {
+              "constant_score": {
+                "query": {
+                  "fuzzy": {
+                    "LastName_DISTANCE": {
+                      "min_similarity": 0.1,
+                      "value": "sai kris",
+                      "prefix_length": 2
+                    }
+                  }
+                },
+                "boost": 10.0
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "filter": {
+    "bool": {
+      "must": []
+    }
+  }
+}

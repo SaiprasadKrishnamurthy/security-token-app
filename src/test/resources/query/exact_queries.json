@@ -1,0 +1,44 @@
+{
+  "explain": true,
+  "from": 0,
+  "size": 50,
+  "query": {
+    "filtered": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "constant_score": {
+                "query": {
+                  "term": {
+                    "FirstName_EXACT": {
+                      "value": "sai kris"
+                    }
+                  }
+                },
+                "boost": 100.0
+              }
+            },
+            {
+              "constant_score": {
+                "query": {
+                  "term": {
+                    "LastName_EXACT": {
+                      "value": "sai kris"
+                    }
+                  }
+                },
+                "boost": 10.0
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "filter": {
+    "bool": {
+      "must": []
+    }
+  }
+}

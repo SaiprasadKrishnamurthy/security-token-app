@@ -1,0 +1,118 @@
+{
+  "explain": true,
+  "from": 0,
+  "size": 50,
+  "filter": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "Gender_EXACT": "m"
+          }
+        }
+      ]
+    }
+  },
+  "query": {
+    "filtered": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "match": {
+                "DocumentId_NGRAM": {
+                  "query": "E99898918",
+                  "boost": 100.0
+                }
+              }
+            },
+            {
+              "match": {
+                "FirstName_PHONETIC": {
+                  "query": "Francesca",
+                  "boost": 100.0
+                }
+              }
+            },
+            {
+              "match": {
+                "FirstName_NGRAM": {
+                  "query": "Francesca",
+                  "boost": 100.0
+                }
+              }
+            },
+            {
+              "constant_score": {
+                "query": {
+                  "fuzzy": {
+                    "FirstName_DISTANCE": {
+                      "min_similarity": 0.1,
+                      "value": "francesca",
+                      "prefix_length": 2
+                    }
+                  }
+                },
+                "boost": 100.0
+              }
+            },
+            {
+              "match": {
+                "LastName_PHONETIC": {
+                  "query": "Mohammad",
+                  "boost": 100.0
+                }
+              }
+            },
+            {
+              "match": {
+                "LastName_NGRAM": {
+                  "query": "Mohammad",
+                  "boost": 100.0
+                }
+              }
+            },
+            {
+              "constant_score": {
+                "query": {
+                  "fuzzy": {
+                    "LastName_DISTANCE": {
+                      "min_similarity": 0.1,
+                      "value": "mohammad",
+                      "prefix_length": 2
+                    }
+                  }
+                },
+                "boost": 100.0
+              }
+            },
+            {
+              "constant_score": {
+                "query": {
+                  "term": {
+                    "Nationality_EXACT": {
+                      "value": "usa"
+                    }
+                  }
+                },
+                "boost": 100.0
+              }
+            },
+            {
+              "constant_score": {
+                "query": {
+                  "wildcard": {
+                    "POB_WILDCARD": {
+                      "value": "seat*le"
+                    }
+                  }
+                },
+                "boost": 100.0
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

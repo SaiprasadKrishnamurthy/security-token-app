@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "DOB": {
+      "type": "multi_field",
+      "fields": {
+        "DOB_EXACT": {
+          "type": "date"
+        }
+      }
+    },
+    "FirstName": {
+      "type": "multi_field",
+      "index": "analyzed",
+      "analyzer": "index_analyzer",
+      "store": "yes",
+      "fields": {
+        "FirstName_NGRAM": {
+          "type": "string",
+          "analyzer": "n-gram-analyser"
+        },
+        "FirstName_DISTANCE": {
+          "type": "string",
+          "analyzer": "as-is-analyser"
+        }
+      }
+    }
+  }
+}

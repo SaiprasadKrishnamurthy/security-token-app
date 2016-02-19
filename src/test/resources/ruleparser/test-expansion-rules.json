@@ -1,0 +1,133 @@
+{
+  "fieldMatchRules": [
+    {
+      "sourceFieldName": "FirstName",
+      "sourceSearchMode": "FUZZY",
+      "scoringAlgorithm": "WEIGHTED_SUM",
+      "rules": [
+        {
+          "precondition": null,
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName",
+          "targetSearchMode": "PHONETIC",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 80
+        },
+        {
+          "precondition": null,
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName",
+          "targetSearchMode": "NGRAM",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        },
+        {
+          "precondition": null,
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName",
+          "targetSearchMode": "DISTANCE",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        }
+      ]
+    },
+    {
+      "sourceFieldName": "LastName",
+      "sourceSearchMode": "FUZZY",
+      "scoringAlgorithm": "WEIGHTED_SUM",
+      "rules": [
+        {
+          "precondition": null,
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "LastName",
+          "targetSearchMode": "PHONETIC",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 80
+        },
+        {
+          "precondition": null,
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "LastName",
+          "targetSearchMode": "NGRAM",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        },
+        {
+          "precondition": null,
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "LastName",
+          "targetSearchMode": "DISTANCE",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        }
+      ]
+    },
+    {
+      "sourceFieldName": "FirstName-AnyLang",
+      "sourceSearchMode": "FUZZY",
+      "scoringAlgorithm": "WEIGHTED_SUM",
+      "rules": [
+        {
+          "precondition": "IF_LATIN",
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName",
+          "targetSearchMode": "PHONETIC",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 80
+        },
+        {
+          "precondition": "IF_LATIN",
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName",
+          "targetSearchMode": "NGRAM",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        },
+        {
+          "precondition": "IF_LATIN",
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName",
+          "targetSearchMode": "DISTANCE",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        },
+        {
+          "precondition": "IF_NON_LATIN",
+          "valueTransformerFunction": "transliteration",
+          "transformerMetadata": "Arabic-Latin",
+          "targetFieldName": "FirstName",
+          "targetSearchMode": "PHONETIC",
+          "fieldWeightageBoostFactor": 10,
+          "algorithmScoreWeightagePercentage": 80
+        },
+        {
+          "precondition": "IF_NON_LATIN",
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName-Ar",
+          "targetSearchMode": "PHONETIC",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        },
+        {
+          "precondition": "IF_NON_LATIN",
+          "valueTransformerFunction": "identity",
+          "transformerMetadata": null,
+          "targetFieldName": "FirstName-Ar",
+          "targetSearchMode": "NGRAM",
+          "fieldWeightageBoostFactor": 1,
+          "algorithmScoreWeightagePercentage": 10
+        }
+      ]
+    }
+  ]
+}

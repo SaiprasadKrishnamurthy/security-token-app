@@ -1,0 +1,7 @@
+mohd,mhd,mohammed,muhammed,muhammad,mohmed,muhmed,mahmood,mahmud,mahamed,mahammed,mahamad,mahammad => mohd,mhd,mohammed,muhammed,muhammad,mohmed,muhmed,mahmood,mahmud,mahamed,mahammed,mahamad,mahammad
+abdul,abdur,abdel => abdul,abdur,abdel
+bill,willy,willie,billy,billie,william => william,bill,willy,willie,billy,billie
+dave,david => david,dave
+rob,robert,robbie,bob,robert => bob,rob,robert,robbie,robert
+steve,steven,stefen,stephen => steve,steven,stefen,stephen
+jim,jimmy,james => jim,jimmy,james

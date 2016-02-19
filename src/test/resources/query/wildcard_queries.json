@@ -1,0 +1,44 @@
+{
+  "explain": true,
+  "from": 0,
+  "size": 50,
+  "query": {
+    "filtered": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "constant_score": {
+                "query": {
+                  "wildcard": {
+                    "FirstName_WILDCARD": {
+                      "value": "sai kris"
+                    }
+                  }
+                },
+                "boost": 100.0
+              }
+            },
+            {
+              "constant_score": {
+                "query": {
+                  "wildcard": {
+                    "LastName_WILDCARD": {
+                      "value": "sai kris"
+                    }
+                  }
+                },
+                "boost": 10.0
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "filter": {
+    "bool": {
+      "must": []
+    }
+  }
+}

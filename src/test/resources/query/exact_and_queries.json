@@ -1,0 +1,30 @@
+{
+  "explain": true,
+  "from": 0,
+  "size": 50,
+  "query": {
+    "filtered": {
+      "query": {
+        "bool": {
+          "should": []
+        }
+      }
+    }
+  },
+  "filter": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "FirstName_EXACT": "sai kris"
+          }
+        },
+        {
+          "term": {
+            "LastName_EXACT": "sai kris"
+          }
+        }
+      ]
+    }
+  }
+}

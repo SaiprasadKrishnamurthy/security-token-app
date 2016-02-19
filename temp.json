@@ -1,0 +1,189 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Concorde Resolver Fuzzy Search Engine - RESTful API",
+    "version": "2.0",
+    "title": "Concorde Resolver REST API",
+    "termsOfService": "http://concorde.com/toc",
+    "contact": {
+      "name": "Saiprasad.Krishnamurthy@gmail.com"
+    },
+    "license": {
+      "name": "Concorde Licence V 1.0",
+      "url": "https://github.com/SaiprasadKrishnamurthy/DatastructuresJava"
+    }
+  },
+  "host": "localhost:8090",
+  "basePath": "/concorde-resolver",
+  "tags": [
+    {
+      "name": "fuzzy search engine",
+      "description": "Resolver Controller"
+    }
+  ],
+  "paths": {
+    "/documents/{repositoryName}": {
+      "post": {
+        "tags": [
+          "fuzzy search engine"
+        ],
+        "summary": "resolve",
+        "operationId": "resolve",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "repositoryName",
+            "in": "path",
+            "description": "repositoryName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "resolveQueries",
+            "description": "resolveQueries",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResolveQuery"
+              }
+            }
+          },
+          {
+            "name": "0",
+            "in": "query",
+            "description": "0",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "size",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResolverResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Failure"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Map«string,long»": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "format": "int64"
+      }
+    },
+    "ScoreDetail": {
+      "properties": {
+        "score": {
+          "type": "number",
+          "format": "double"
+        },
+        "scoreExplanation": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/List"
+          }
+        }
+      }
+    },
+    "Map«OriginalField,List«ResolveQuery»»": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/List"
+      }
+    },
+    "ResolveQuery": {
+      "properties": {
+        "fieldName": {
+          "type": "string"
+        },
+        "fieldValue": {
+          "type": "object"
+        },
+        "resolveMode": {
+          "type": "string",
+          "enum": [
+            "FUZZY",
+            "PHONETIC",
+            "NGRAM",
+            "DISTANCE",
+            "EXACT",
+            "WILDCARD",
+            "EXACT_AND",
+            "GREATER_THAN",
+            "LESSER_THAN"
+          ]
+        },
+        "weightage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "ResolverResult": {
+      "properties": {
+        "document": {
+          "type": "object"
+        },
+        "score": {
+          "$ref": "#/definitions/ScoreDetail"
+        }
+      }
+    },
+    "ResolverResponse": {
+      "properties": {
+        "repositoryName": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResolverResult"
+          }
+        },
+        "timings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}

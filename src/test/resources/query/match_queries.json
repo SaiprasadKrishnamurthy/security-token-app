@@ -1,0 +1,36 @@
+{
+  "explain": true,
+  "from": 0,
+  "size": 50,
+  "query": {
+    "filtered": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "match": {
+                "FirstName_PHONETIC": {
+                  "query": "Sai Kris",
+                  "boost": 10.0
+                }
+              }
+            },
+            {
+              "match": {
+                "LastName_PHONETIC": {
+                  "query": "Sai Kris",
+                  "boost": 10.0
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "filter": {
+    "bool": {
+      "must": []
+    }
+  }
+}

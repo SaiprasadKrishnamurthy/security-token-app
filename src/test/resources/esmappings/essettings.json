@@ -1,0 +1,88 @@
+{
+  "analysis": {
+    "analyzer": {
+      "index_analyzer": {
+        "tokenizer": "standard",
+        "filter": [
+          "standard",
+          "lowercase",
+          "asciifolding"
+        ]
+      },
+      "lowercase_analyzer": {
+        "tokenizer": "standard",
+        "filter": [
+          "lowercase"
+        ]
+      },
+      "uppercase_analyzer": {
+        "tokenizer": "standard",
+        "filter": [
+          "uppercase"
+        ]
+      },
+      "n-gram-analyser": {
+        "tokenizer": "my_ngram_tokenizer",
+        "filter": [
+          "my_whitespace_remove",
+          "lowercase"
+        ]
+      },
+      "as-is-analyser": {
+        "tokenizer": "keyword",
+        "filter": [
+          "lowercase"
+        ]
+      }
+    },
+    "tokenizer": {
+      "my_ngram_tokenizer": {
+        "type": "nGram",
+        "min_gram": "3",
+        "max_gram": "3",
+        "token_chars": [
+          "letter",
+          "digit"
+        ]
+      },
+      "large_ngram_tokenizer": {
+        "type": "nGram",
+        "min_gram": "6",
+        "max_gram": "6",
+        "token_chars": [
+          "letter",
+          "digit"
+        ]
+      }
+    },
+    "filter": {
+      "my_whitespace_remove": {
+        "type": "pattern_replace",
+        "pattern": " ",
+        "replacement": ""
+      },
+      "my_synonym": {
+        "type": "synonym",
+        "ignore_case": "true",
+        "expand": true,
+        "synonyms_path": "synonyms.txt"
+      },
+      "my_delimiter": {
+        "type": "word_delimiter",
+        "generate_word_parts": true,
+        "catenate_words": false,
+        "catenate_numbers": false,
+        "catenate_all": false,
+        "split_on_case_change": false,
+        "preserve_original": false,
+        "split_on_numerics": false,
+        "stem_english_possessive": false
+      },
+      "ar_filter": {
+        "type": "standard",
+        "language": "arabic"
+      }
+    }
+  }
+}
+

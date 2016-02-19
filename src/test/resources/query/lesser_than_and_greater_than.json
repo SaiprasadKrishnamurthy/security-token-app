@@ -1,0 +1,36 @@
+{
+  "explain": true,
+  "from": 0,
+  "size": 50,
+  "filter": {
+    "bool": {
+      "must": []
+    }
+  },
+  "query": {
+    "filtered": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "range": {
+                "DOB_LESSER_THAN": {
+                  "lt": "1991-03-14",
+                  "boost": 100.0
+                }
+              }
+            },
+            {
+              "range": {
+                "DOB_GREATER_THAN": {
+                  "gt": "1991-03-11",
+                  "boost": 10.0
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
