@@ -28,10 +28,14 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties("resolver")
+@ConfigurationProperties("app")
 public class AppProperties {
     private String ldapUrl;
     private String ldapUser;
     private String ldapPassword;
     private String ldapBase;
+    private String userBase;
+    private String secret;
+    private String signatureAlgorithm;
+    private int expiresAfterSeconds;
 }

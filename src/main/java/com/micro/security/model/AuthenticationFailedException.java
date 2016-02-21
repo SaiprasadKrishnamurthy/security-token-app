@@ -5,4 +5,9 @@ package com.micro.security.model;
  */
 public class AuthenticationFailedException extends RuntimeException {
 
+    private String message;
+
+    public AuthenticationFailedException(final String message) {
+        super(message);
+    }
 }
