@@ -7,7 +7,6 @@ import lombok.Data;
  */
 @Data
 public class NumberOfTransactionsRule {
-    private String permissionToken;
     private int maxNumberOfTransactionsAllowed;
-    private long untilTime;
+    private long timeAllowedInSeconds;
 }

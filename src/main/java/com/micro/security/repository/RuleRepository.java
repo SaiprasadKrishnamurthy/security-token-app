@@ -30,43 +30,44 @@ public class RuleRepository {
     }
 
     public void save(final AccessRule accessRule) {
-        String sql = "INSERT INTO access_rule(id, uri, permissionrule_requiredpermissions, permissionrule_minimumnumberofpermissionsmatch, tokenexpirationrule_permissiontoken, tokenexpirationrule_expirationtimeinseconds, numberoftransactionsrule_permissiontoken, numberoftransactionsrule_maxnumberoftransactionsallowed, numberoftransactionsrule_untiltime) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO access_rule(id, uri, http_method, permissionrule_requiredpermissions, permissionrule_lenient, numberoftransactionsrule_maxnumberoftransactionsallowed, numberoftransactionsrule_timeallowedinseconds) VALUES(?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql,
                 UUID.randomUUID().toString(),
                 accessRule.getUri(),
+                accessRule.getHttpMethod(),
                 toCsv(accessRule.getPermissionRule().getRequiredPermissions()),
-                accessRule.getPermissionRule().getMinimumNumberOfPermissionsMatch(),
-                accessRule.getNumberOfTransactionsRule().getPermissionToken(),
+                accessRule.getPermissionRule().isLenient(),
                 accessRule.getNumberOfTransactionsRule().getMaxNumberOfTransactionsAllowed(),
-                accessRule.getNumberOfTransactionsRule().getUntilTime()
+                accessRule.getNumberOfTransactionsRule().getTimeAllowedInSeconds()
         );
     }
 
     public List<AccessRule> allAccessRules() {
-        String sql = "SELECT id, uri, permissionrule_requiredpermissions, permissionrule_minimumnumberofpermissionsmatch, tokenexpirationrule_permissiontoken, tokenexpirationrule_expirationtimeinseconds, numberoftransactionsrule_permissiontoken, numberoftransactionsrule_maxnumberoftransactionsallowed, numberoftransactionsrule_untiltime FROM ACCESS_RULE";
+        String sql = "SELECT id, uri, http_method, permissionrule_requiredpermissions, permissionrule_lenient, numberoftransactionsrule_permissiontoken, numberoftransactionsrule_maxnumberoftransactionsallowed, numberoftransactionsrule_timeallowedinseconds FROM ACCESS_RULE";
         return jdbcTemplate.query(sql, new RowMapper<AccessRule>() {
 
             @Override
             public AccessRule mapRow(final ResultSet resultSet, final int i) throws SQLException {
                 String id = resultSet.getString("id");
                 String uri = resultSet.getString("uri");
+                String httpMethod = resultSet.getString("http_method");
                 String permissionRuleRequiredPermissions = resultSet.getString("permissionrule_requiredpermissions");
-                Integer permissionRuleMinimumNumberOfPermissionsMatch = resultSet.getInt("permissionrule_minimumnumberofpermissionsmatch");
-                String numberOfTransactionsRulePermissionToken = resultSet.getString("numberoftransactionsrule_permissiontoken");
+                boolean permissionRuleLenient = resultSet.getBoolean("permissionrule_lenient");
                 Integer numberOfTransactionsRuleAllowedNumberOfTransactions = resultSet.getInt("numberoftransactionsrule_maxnumberoftransactionsallowed");
-                Long numberOfTransactionsRuleTimeUntil = resultSet.getLong("numberoftransactionsrule_untiltime");
+                Integer numberOfTransactionsRuleTimeUntil = resultSet.getInt("numberoftransactionsrule_timeallowedinseconds");
 
                 PermissionRule permissionRule = new PermissionRule();
                 permissionRule.setRequiredPermissions(Arrays.asList(permissionRuleRequiredPermissions.split(",")));
-                permissionRule.setMinimumNumberOfPermissionsMatch(permissionRuleMinimumNumberOfPermissionsMatch);
+                permissionRule.setLenient(permissionRuleLenient);
 
                 NumberOfTransactionsRule numberOfTransactionsRule = new NumberOfTransactionsRule();
                 numberOfTransactionsRule.setMaxNumberOfTransactionsAllowed(numberOfTransactionsRuleAllowedNumberOfTransactions);
-                numberOfTransactionsRule.setUntilTime(numberOfTransactionsRuleTimeUntil);
+                numberOfTransactionsRule.setTimeAllowedInSeconds(numberOfTransactionsRuleTimeUntil);
 
                 AccessRule accessRule = new AccessRule();
                 accessRule.setId(id);
                 accessRule.setUri(uri);
+                accessRule.setHttpMethod(httpMethod);
 
                 accessRule.setPermissionRule(permissionRule);
                 accessRule.setNumberOfTransactionsRule(numberOfTransactionsRule);

@@ -14,4 +14,16 @@ public class GlobalExceptionHandling {
     public ResponseEntity<?> authenticationFailed(final Exception e) {
         return new ResponseEntity<String>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler({InsufficientPrivilegesException.class})
+    @ResponseBody
+    public ResponseEntity<?> authorizationFailed(final Exception e) {
+        return new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler({TransactionsQuotaExceededException.class})
+    @ResponseBody
+    public ResponseEntity<?> quotaExceeded(final Exception e) {
+        return new ResponseEntity<String>(e.getMessage(), HttpStatus.TOO_MANY_REQUESTS);
+    }
 }

@@ -10,5 +10,5 @@ import java.util.List;
 @Data
 public class PermissionRule {
     private List<String> requiredPermissions;
-    private int minimumNumberOfPermissionsMatch;
+    private boolean lenient;
 }

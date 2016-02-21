@@ -1,6 +1,10 @@
 package com.micro.security.model;
 
+import org.apache.commons.collections.ListUtils;
 import org.springframework.util.AntPathMatcher;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by saipkri on 20/02/16.
@@ -17,5 +21,14 @@ public class Sample {
 
         AntPathMatcher am = new AntPathMatcher("/");
         System.out.println(am.match(pattern, actual));
+
+        List<String> l1 = Arrays.asList("1", "2", "3");
+        List<String> l2 = Arrays.asList("1", "4", "5");
+
+        System.out.println(ListUtils.intersection(l1, l2));
+
+        /*
+            if(intersection.size > 0 && (minimumMatch || intersection.size == size))
+         */
     }
 }

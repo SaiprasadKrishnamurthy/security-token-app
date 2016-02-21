@@ -5,4 +5,5 @@ package com.micro.security.model;
  */
 public interface TokenService {
     String getTokenForUser(User user);
+    void validateToken(final String token, final String uri, final String verb);
 }

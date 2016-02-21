@@ -9,6 +9,7 @@ import java.sql.Date;
 public class TransactionLog {
     private String userId;
     private String uri;
+    private String verb;
     private int numberOfTransactions;
-    private Date untilTime;
+    private int expiresAfterSeconds;
 }
