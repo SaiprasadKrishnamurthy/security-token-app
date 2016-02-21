@@ -77,4 +77,11 @@ public class LdapUserStoreService implements UserStoreService {
         System.out.println(" --------- success --------- ");
         return users.get(0);
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        SearchControls controls = new SearchControls();
+        controls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+        return ldapTemplate.search("ou=Users", "(objectClass=person)", controls, new UserAttributesMapper());
+    }
 }
