@@ -91,7 +91,11 @@ public class EmbeddedLdapServer {
             service.getAdminSession().add(entryBar);
         }
 
-        applyLdif(new File(EmbeddedLdapServer.class.getClassLoader().getResource("ldif/test-ldap-tree.ldif").toURI().getPath()));
+        if (EmbeddedLdapServer.class.getClassLoader().getResource("ldif/test-ldap-tree.ldif").toURI().getPath() != null) {
+            applyLdif(new File(EmbeddedLdapServer.class.getClassLoader().getResource("ldif/test-ldap-tree.ldif").toURI().getPath()));
+        } else {
+            applyLdif(new File("test-ldap-tree.ldif"));
+        }
     }
 
     public void applyLdif(final File ldifFile) throws Exception {
@@ -111,7 +115,7 @@ public class EmbeddedLdapServer {
      * Main class. We just do a lookup on the server to check that it's available.
      *
      * @param args Not used.
-     */
+     *//*
     public static void main(String[] args) //throws Exception
     {
         try {
@@ -126,5 +130,5 @@ public class EmbeddedLdapServer {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
