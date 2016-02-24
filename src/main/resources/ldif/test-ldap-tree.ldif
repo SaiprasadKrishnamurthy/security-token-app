@@ -62,3 +62,46 @@ telephoneNumber: 169-637-3314
 telephoneNumber: 907-547-9114
 uid: cbrunato
 userPassword:: cGFzcw==
+
+dn: cn=James Doe,ou=Users,dc=securityapp,dc=org
+objectClass: organizationalPerson
+objectClass: person
+objectClass: extensibleObject
+objectClass: uidObject
+objectClass: inetOrgPerson
+objectClass: top
+cn: James Doe
+sn: James Doe
+description: 19741108000000Z
+employeeNumber: 15
+givenName: James
+telephoneNumber: 254-323-1920
+postalAddress: No 49, Albacore Way, Hayes, Middlesex UB3 2FS
+uid: jamesdoe
+userPassword:: cGFzcw==
+businessCategory: READ_APP_1
+businessCategory: READ_APP_2
+businessCategory: READ_APP_3
+mail: james@example.com
+
+dn: cn=Rob Sanders,ou=Users,dc=securityapp,dc=org
+objectClass: organizationalPerson
+objectClass: person
+objectClass: extensibleObject
+objectClass: uidObject
+objectClass: inetOrgPerson
+objectClass: top
+cn: Rob Sanders
+sn: Rob Sanders
+description: 19741108000000Z
+employeeNumber: 16
+givenName: Rob Sanders
+telephoneNumber: 254-323-1920
+postalAddress: No 49, Albacore Way, Hayes, Middlesex UB3 2FS
+uid: robsanders
+userPassword:: cGFzcw==
+businessCategory: READ_APP_1
+businessCategory: READ_APP_2
+businessCategory: READ_APP_3
+businessCategory: WRITE_APP_4
+mail: robsanders@example.com
