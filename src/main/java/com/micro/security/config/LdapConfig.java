@@ -33,24 +33,4 @@ public class LdapConfig {
     public LdapTemplate ldapTemplate() {
         return new LdapTemplate(contextSource());
     }
-
-    /**
-     * This bean starts an embedded LDAP Server. Note that <code>start</code>
-     * is not called on the server as the same is done as part of the bean life cycle's
-     * afterPropertySet() method.
-     * @return The Embedded Ldap Server
-     * @throws Exception
-     *//*
-    @Bean(name = "ldap-server")
-    public ApacheDSContainer getLdapServer() throws Exception {
-        13.
-        ApacheDSContainer container = new ApacheDSContainer("o=welflex",
-                14.
-                "classpath:flightcontrol.ldiff");
-        15.
-        container.setPort(EMBEDDED_LDAP_SERVER_PORT);
-        16.
-        return container;
-        17.
-    }*/
 }
