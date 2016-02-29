@@ -1,0 +1,31 @@
+<h2>A simple security gateway server that performs Authentication, Authorization and Service Level Agreement (SLA) checks.</h2>
+<br />
+Here is how it works:
+
+<b>Step 1:</b>  The Administrators create access rules using the Rule Resource API. These rules govern which URI needs what permission tokens
+to consume using a specific HTTP verb. Also, it can additionally define how many requests (transactions) are allowed within a specific time
+window for users with specific permission tokens. This is basically the service level agreement.
+
+<b>Step 2:</b> Once the rules are defined in the system, the user is authenticated using the Authentication Resource endpoint.
+There are a lot of canned users provided as part of the APP. These users can be listed using the Users Resource API. The password
+ for all the users are <b><i>pass</i></b>
+
+ <b>Step 3:</b> Upon successful authentication, the users will get a signed Jason Web Token (JWT).
+
+ <b>Step 4:</b> The users will then need to pass this token in the http bearer header to the Authorization Resource API to get the
+ authorization and SLA checks performed.
+
+ <b>Step 5:</b> This set up uses an embedded LDAP for user store and a in-memory H2 database as a DB. However, they can be easily switched
+  to a real LDAP and DB as a matter of configuration.
+
+  <b>It's built using Java 8 + Spring Boot (as the micro framework).</b>
+
+  <b> Health and Metrics Endpoints:  Just the basic health and metrics are exposed via /health and /metrics via GET respectively.</b>
+
+
+
+
+
+
+
+

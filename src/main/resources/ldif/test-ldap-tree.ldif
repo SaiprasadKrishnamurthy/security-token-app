@@ -13,21 +13,6 @@ objectClass: organizationalUnit
 objectClass: top
 ou: Groups
 
-dn: cn=Adan Abrams,ou=Users,dc=securityapp,dc=org
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: Adan Abrams
-sn: Abrams
-description: 19741108000000Z
-employeeNumber: 7
-givenName: Adan
-telephoneNumber: 254-323-1920
-telephoneNumber: 902-451-7619
-uid: aabrams
-userPassword:: cGFzcw==
-
 dn: cn=Sai Kris,ou=Users,dc=securityapp,dc=org
 objectClass: organizationalPerson
 objectClass: person
@@ -47,21 +32,6 @@ userPassword:: cGFzcw==
 businessCategory: READ_APP_1
 businessCategory: READ_APP_2
 mail: test@example.com
-
-dn: cn=Chuck Brunato,ou=Users,dc=securityapp,dc=org
-objectClass: inetOrgPerson
-objectClass: organizationalPerson
-objectClass: person
-objectClass: top
-cn: Chuck Brunato
-sn: Brunato
-description: 19650324000000Z
-employeeNumber: 3
-givenName: Chuck
-telephoneNumber: 169-637-3314
-telephoneNumber: 907-547-9114
-uid: cbrunato
-userPassword:: cGFzcw==
 
 dn: cn=James Doe,ou=Users,dc=securityapp,dc=org
 objectClass: organizationalPerson

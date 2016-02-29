@@ -3,6 +3,7 @@ package com.micro.security.repository;
 import com.micro.security.model.AccessRule;
 import com.micro.security.model.NumberOfTransactionsRule;
 import com.micro.security.model.PermissionRule;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;

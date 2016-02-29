@@ -17,6 +17,7 @@
 package com.micro.security;
 
 import com.google.common.base.Predicates;
+import org.apache.commons.io.IOUtils;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -68,19 +69,19 @@ public class SecurityTokenApp {
      * @return swagger 2 Docket.
      */
     @Bean
-    public Docket resolverApi() {
+    public Docket resolverApi() throws Exception{
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("concorde-resolver")
+                .groupName("security-app")
                 .apiInfo(apiInfo())
                 .select()
                 .paths(Predicates.not(PathSelectors.regex("/error"))) // Exclude Spring error controllers
                 .build();
     }
 
-    private ApiInfo apiInfo() {
+    private ApiInfo apiInfo() throws Exception{
         return new ApiInfoBuilder()
-                .title("Security Token App REST API")
-                .description("APIs for token based security")
+                .title("Security Gateway APP")
+                .description(IOUtils.toString(SecurityTokenApp.class.getClassLoader().getResourceAsStream("description.txt")))
                 .contact("Saiprasad.Krishnamurthy@gmail.com")
                 .license("Apache V 2.0")
                 .licenseUrl("https://github.com/SaiprasadKrishnamurthy")
