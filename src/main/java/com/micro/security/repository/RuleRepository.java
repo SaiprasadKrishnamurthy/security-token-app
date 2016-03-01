@@ -99,6 +99,17 @@ public class RuleRepository {
         return accessRules.stream()
                 .filter(rule -> rule.getUid().equals(ruleId))
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException("Rule not found for id: "+ruleId));
+                .orElseThrow(() -> new NotFoundException("Rule not found for id: " + ruleId));
+    }
+
+    public void delete(final String ruleId) {
+        String sql = "DELETE FROM ACCESS_RULE where id=?";
+        int resultSize = jdbcTemplate.update(sql, ruleId);
+        if (resultSize <= 0) throw new NotFoundException("Cannot delete rule: " + ruleId + " cause it doesn't exist!");
+    }
+
+    public void update(final AccessRule accessRule) {
+        delete(accessRule.getUid());
+        save(accessRule);
     }
 }

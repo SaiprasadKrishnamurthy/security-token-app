@@ -36,6 +36,18 @@ public class RuleResource {
         return new ResponseEntity<String>(HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = "/rule/{uid}", method = RequestMethod.DELETE, produces = "text/plain")
+    public ResponseEntity<String> deleteAccessRule(@PathVariable("uid") final String uid) {
+        ruleRepository.delete(uid);
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/rule", method = RequestMethod.PUT, consumes = "application/json", produces = "text/plain")
+    public ResponseEntity<String> updateAccessRule(@RequestBody final AccessRule accessRule) {
+        ruleRepository.update(accessRule);
+        return new ResponseEntity<String>(HttpStatus.CREATED);
+    }
+
     @RequestMapping(value = "/rule/{uid}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<AccessRule> ruleById(@PathVariable("uid") final String uid) {
         AccessRule rule = ruleRepository.findById(uid);
