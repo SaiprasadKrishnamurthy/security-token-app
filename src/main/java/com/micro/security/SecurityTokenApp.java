@@ -82,7 +82,7 @@ public class SecurityTokenApp {
         return new ApiInfoBuilder()
                 .title("Security Gateway APP")
                 .description(IOUtils.toString(SecurityTokenApp.class.getClassLoader().getResourceAsStream("description.txt")))
-                .contact("Saiprasad.Krishnamurthy@gmail.com")
+                .contact("Saiprasad.Krishnamurthy@gmail.com, saiprkri@cisco.com")
                 .license("Apache V 2.0")
                 .licenseUrl("https://github.com/SaiprasadKrishnamurthy")
                 .version("1.0")
