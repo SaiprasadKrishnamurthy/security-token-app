@@ -10,6 +10,7 @@
 
 It's built using Java 8 + Spring Boot (as the micro framework).
 * Health and Metrics Endpoints: Just the basic health and metrics are exposed via /health and /metrics via GET respectively.
+
 **HATEOAS support is provided for Rule Resource only**
 
 A few canned access rules are already created in the system for reference and can be accessed via the rules resource: /rules
