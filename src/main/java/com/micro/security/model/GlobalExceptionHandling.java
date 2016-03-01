@@ -32,4 +32,10 @@ public class GlobalExceptionHandling {
     public ResponseEntity<?> notFound(final Exception e) {
         return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler({IllegalArgumentException.class})
+    @ResponseBody
+    public ResponseEntity<?> illegalArgument(final Exception e) {
+        return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
