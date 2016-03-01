@@ -28,7 +28,7 @@ mvn clean install
 cd target
 java -jar security-token-app.jar
 ```
-## API index page can be viewed at http://localhost:9090/swagger-ui.html
+### API index page can be viewed at http://localhost:9090/swagger-ui.html
 
 ## LDAP Details
 The app is bundled with an in-memory/embedded LDAP instance. The user tree is loaded from ../src/main/resources/ldif/test-ldap-tree.ldif
