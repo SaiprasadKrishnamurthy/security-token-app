@@ -42,7 +42,7 @@ public class AuthenticationResource  {
                     @ApiResponse(code = 401, message = "Authentication failure")
             }
     )
-    @ApiOperation(value = "Endpoint operation that authenticates a user and returns a new signed Json Web Token on success.")
+    @ApiOperation(value = "API Endpoint operation that authenticates a user against a user data store (eg: LDAP) and issues a JSON Web Token upon successful authentication.")
     @RequestMapping(value = "/token/new", method = RequestMethod.POST, consumes = "application/json", produces = "text/plain")
     public ResponseEntity<String> createToken(@RequestBody final CreateTokenRequest createTokenRequest) {
         // Authenticate the user and return the details as a Token.

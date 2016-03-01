@@ -1,6 +1,7 @@
 package com.micro.security.repository;
 
 import com.micro.security.model.AccessRule;
+import com.micro.security.model.NotFoundException;
 import com.micro.security.model.NumberOfTransactionsRule;
 import com.micro.security.model.PermissionRule;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -49,36 +50,55 @@ public class RuleRepository {
 
             @Override
             public AccessRule mapRow(final ResultSet resultSet, final int i) throws SQLException {
-                String id = resultSet.getString("id");
-                String uri = resultSet.getString("uri");
-                String httpMethod = resultSet.getString("http_method");
-                String permissionRuleRequiredPermissions = resultSet.getString("permissionrule_requiredpermissions");
-                boolean permissionRuleLenient = resultSet.getBoolean("permissionrule_lenient");
-                Integer numberOfTransactionsRuleAllowedNumberOfTransactions = resultSet.getInt("numberoftransactionsrule_maxnumberoftransactionsallowed");
-                Integer numberOfTransactionsRuleTimeUntil = resultSet.getInt("numberoftransactionsrule_timeallowedinseconds");
-
-                PermissionRule permissionRule = new PermissionRule();
-                permissionRule.setRequiredPermissions(Arrays.asList(permissionRuleRequiredPermissions.split(",")));
-                permissionRule.setLenient(permissionRuleLenient);
-
-                NumberOfTransactionsRule numberOfTransactionsRule = new NumberOfTransactionsRule();
-                numberOfTransactionsRule.setMaxNumberOfTransactionsAllowed(numberOfTransactionsRuleAllowedNumberOfTransactions);
-                numberOfTransactionsRule.setTimeAllowedInSeconds(numberOfTransactionsRuleTimeUntil);
-
-                AccessRule accessRule = new AccessRule();
-                accessRule.setId(id);
-                accessRule.setUri(uri);
-                accessRule.setHttpMethod(httpMethod);
-
-                accessRule.setPermissionRule(permissionRule);
-                accessRule.setNumberOfTransactionsRule(numberOfTransactionsRule);
-
-                return accessRule;
+                return getAccessRule(resultSet);
             }
         });
     }
 
+    private AccessRule getAccessRule(ResultSet resultSet) throws SQLException {
+        String id = resultSet.getString("id");
+        String uri = resultSet.getString("uri");
+        String httpMethod = resultSet.getString("http_method");
+        String permissionRuleRequiredPermissions = resultSet.getString("permissionrule_requiredpermissions");
+        boolean permissionRuleLenient = resultSet.getBoolean("permissionrule_lenient");
+        Integer numberOfTransactionsRuleAllowedNumberOfTransactions = resultSet.getInt("numberoftransactionsrule_maxnumberoftransactionsallowed");
+        Integer numberOfTransactionsRuleTimeUntil = resultSet.getInt("numberoftransactionsrule_timeallowedinseconds");
+
+        PermissionRule permissionRule = new PermissionRule();
+        permissionRule.setRequiredPermissions(Arrays.asList(permissionRuleRequiredPermissions.split(",")));
+        permissionRule.setLenient(permissionRuleLenient);
+
+        NumberOfTransactionsRule numberOfTransactionsRule = new NumberOfTransactionsRule();
+        numberOfTransactionsRule.setMaxNumberOfTransactionsAllowed(numberOfTransactionsRuleAllowedNumberOfTransactions);
+        numberOfTransactionsRule.setTimeAllowedInSeconds(numberOfTransactionsRuleTimeUntil);
+
+        AccessRule accessRule = new AccessRule();
+        accessRule.setUid(id);
+        accessRule.setUri(uri);
+        accessRule.setHttpMethod(httpMethod);
+
+        accessRule.setPermissionRule(permissionRule);
+        accessRule.setNumberOfTransactionsRule(numberOfTransactionsRule);
+
+        return accessRule;
+    }
+
     private static String toCsv(final List<String> list) {
         return list.stream().collect(joining(","));
+    }
+
+    public AccessRule findById(final String ruleId) {
+        String sql = "SELECT * FROM ACCESS_RULE where id=?";
+        List<AccessRule> accessRules = jdbcTemplate.query(sql, new Object[]{ruleId}, new RowMapper<AccessRule>() {
+            @Override
+            public AccessRule mapRow(final ResultSet resultSet, final int i) throws SQLException {
+                return getAccessRule(resultSet);
+            }
+        });
+        // It's silly but ok for now.
+        return accessRules.stream()
+                .filter(rule -> rule.getUid().equals(ruleId))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException("Rule not found for id: "+ruleId));
     }
 }

@@ -26,4 +26,10 @@ public class GlobalExceptionHandling {
     public ResponseEntity<?> quotaExceeded(final Exception e) {
         return new ResponseEntity<String>(e.getMessage(), HttpStatus.TOO_MANY_REQUESTS);
     }
+
+    @ExceptionHandler({NotFoundException.class})
+    @ResponseBody
+    public ResponseEntity<?> notFound(final Exception e) {
+        return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }
