@@ -75,3 +75,27 @@ businessCategory: READ_APP_2
 businessCategory: READ_APP_3
 businessCategory: WRITE_APP_4
 mail: robsanders@example.com
+
+dn: cn=james white,ou=Users,dc=securityapp,dc=org
+objectClass: organizationalPerson
+objectClass: person
+objectClass: extensibleObject
+objectClass: uidObject
+objectClass: inetOrgPerson
+objectClass: top
+cn: Rob Sanders
+sn: Rob Sanders
+description: 19741108000000Z
+employeeNumber: 16
+givenName: James White
+telephoneNumber: 254-323-1920
+postalAddress: No 49, Albacore Way, Hayes, Middlesex UB3 2FS
+uid: jameswhite
+userPassword:: cGFzcw==
+businessCategory: READ_APP_1
+businessCategory: READ_APP_2
+businessCategory: READ_APP_3
+businessCategory: WRITE_APP_1
+businessCategory: WRITE_APP_2
+businessCategory: WRITE_APP_3
+mail: jameswhite@example.com
