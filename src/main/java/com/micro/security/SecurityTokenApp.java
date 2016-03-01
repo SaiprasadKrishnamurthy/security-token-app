@@ -24,7 +24,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.scheduling.annotation.EnableAsync;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -81,7 +80,7 @@ public class SecurityTokenApp {
     private ApiInfo apiInfo() throws Exception{
         return new ApiInfoBuilder()
                 .title("Security Gateway APP")
-                .description(IOUtils.toString(SecurityTokenApp.class.getClassLoader().getResourceAsStream("description.txt")))
+                .description(IOUtils.toString(SecurityTokenApp.class.getClassLoader().getResourceAsStream("description.html")))
                 .contact("Saiprasad.Krishnamurthy@gmail.com, saiprkri@cisco.com")
                 .license("Apache V 2.0")
                 .licenseUrl("https://github.com/SaiprasadKrishnamurthy")
