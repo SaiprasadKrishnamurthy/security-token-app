@@ -26,6 +26,15 @@ There are a lot of canned users provided as part of the APP. These users can be 
 
 <b>A few canned access rules are already created in the system for reference and can be accessed via the rules resource:  /rules</b>
 
+<h2>Contributors</h2>
+<b>
+    <ul>
+        <li>Sai Krishnamurthy - saiprkri@cisco.com</li>
+        <li>Nishit Goyal - nisgoyal@cisco.com</li>
+        <li>Rohit Sharma - rosharm3@cisco.com</li>
+    </ul>
+</b>
+
 
 
 
