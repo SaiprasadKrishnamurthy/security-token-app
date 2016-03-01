@@ -12,7 +12,7 @@ There are a lot of canned users provided as part of the APP. These users can be 
 
  <b>Step 3:</b> Upon successful authentication, the users will get a signed Jason Web Token (JWT).
 
- <b>Step 4:</b> The users will then need to pass this token in the http bearer header to the Authorization Resource API to get the
+ <b>Step 4:</b> The users will then need to pass this token in the http Authorization header (using the Bearer schema) to the Authorization Resource API to get the
  authorization and SLA checks performed.
 
  <b>Step 5:</b> This set up uses an embedded LDAP for user store and a in-memory H2 database as a DB. However, they can be easily switched
