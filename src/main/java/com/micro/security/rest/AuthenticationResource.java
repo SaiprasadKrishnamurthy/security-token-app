@@ -45,6 +45,7 @@ public class AuthenticationResource  {
     @ApiOperation(value = "API Endpoint operation that authenticates a user against a user data store (eg: LDAP) and issues a JSON Web Token upon successful authentication.")
     @RequestMapping(value = "/token/new", method = RequestMethod.POST, consumes = "application/json", produces = "text/plain")
     public ResponseEntity<String> createToken(@RequestBody final CreateTokenRequest createTokenRequest) {
+        LOG.info("Create token: "+createTokenRequest);
         // Authenticate the user and return the details as a Token.
         User user = userStoreService.authenticateAndGetUserDetails(createTokenRequest.getUsername(), createTokenRequest.getPassword());
         String token = tokenService.getTokenForUser(user);

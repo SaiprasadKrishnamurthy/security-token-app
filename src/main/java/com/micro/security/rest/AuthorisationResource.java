@@ -2,6 +2,7 @@ package com.micro.security.rest;
 
 import com.micro.security.model.TokenService;
 import io.swagger.annotations.*;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -15,6 +16,8 @@ import java.net.URL;
 @Api(value = "API Endpoint that performs all the necessary authorisation checks for the user identified by a token sent through the Authorization header using Bearer schema")
 @RestController
 public class AuthorisationResource {
+
+    private static final Logger LOG = Logger.getLogger(AuthorisationResource.class);
 
     private final TokenService tokenService;
 
@@ -42,7 +45,8 @@ public class AuthorisationResource {
 
     private void authorise(final String httpVerb, final String url, final String jsonWebToken) throws Exception {
         String uri = new URL(url).getPath();
-        if (!jsonWebToken.startsWith("Bearer ")) {
+        LOG.info("Authorise: "+httpVerb+", "+url+", "+jsonWebToken);
+            if (!jsonWebToken.startsWith("Bearer ")) {
             throw new IllegalArgumentException("Authorization header value must start with Bearer followed by your Json Web Token");
         }
         String token = jsonWebToken.replace("Bearer ", "");

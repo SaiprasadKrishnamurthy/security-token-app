@@ -32,24 +32,28 @@ public class RuleResource {
 
     @RequestMapping(value = "/rule", method = RequestMethod.POST, consumes = "application/json", produces = "text/plain")
     public ResponseEntity<String> createAccessRule(@RequestBody final AccessRule accessRule) {
+        LOG.info("Create access rule: " + accessRule);
         ruleRepository.save(accessRule);
         return new ResponseEntity<String>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/rule/{uid}", method = RequestMethod.DELETE, produces = "text/plain")
     public ResponseEntity<String> deleteAccessRule(@PathVariable("uid") final String uid) {
+        LOG.info("Delete access rule: " + uid);
         ruleRepository.delete(uid);
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/rule", method = RequestMethod.PUT, consumes = "application/json", produces = "text/plain")
     public ResponseEntity<String> updateAccessRule(@RequestBody final AccessRule accessRule) {
+        LOG.info("Update access rule: " + accessRule);
         ruleRepository.update(accessRule);
         return new ResponseEntity<String>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/rule/{uid}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<AccessRule> ruleById(@PathVariable("uid") final String uid) {
+        LOG.info("Find rule by id: " + uid);
         AccessRule rule = ruleRepository.findById(uid);
         Link link = linkTo(RuleResource.class).slash("rule").slash(rule.getUid()).withSelfRel();
         rule.add(link);
@@ -58,6 +62,7 @@ public class RuleResource {
 
     @RequestMapping(value = "/rules", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<AccessRule>> allRules() {
+        LOG.info("All access rules: ");
         List<AccessRule> allRules = ruleRepository.allAccessRules();
         allRules.forEach(rule -> {
             Link link = linkTo(RuleResource.class).slash("rule").slash(rule.getUid()).withSelfRel();

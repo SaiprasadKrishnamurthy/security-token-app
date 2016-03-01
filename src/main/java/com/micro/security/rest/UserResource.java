@@ -41,6 +41,7 @@ public class UserResource {
     @ApiOperation(value = "Endpoint operation that gets all user details from the user store (eg: LDAP)")
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<User>> getAllUsers() {
+        LOG.info("Get All users");
         return new ResponseEntity<List<User>>(userStoreService.getAllUsers(), HttpStatus.OK);
     }
 }
