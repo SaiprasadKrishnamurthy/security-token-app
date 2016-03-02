@@ -41,54 +41,16 @@ to a real LDAP and DB as a matter of configuration.
     respectively.</b>
 
 <b>HATEOAS support is provided for Rule Resource only</b>
-
-    <b>A few canned access rules are already created in the system for reference and can be accessed via the rules
-        resource: /rules</b>
-
-    <br/>
-    <b>A few specific low-level notes:</b>
-    <p>This APP connects to LDAP to authenticate and get the user details – To keep it simple and self contained, we use
-        an embedded/in-memory LDAP. However, it can point to a real LDAP by means of a simple configuration change.
-        This APP connects to an in-memory/embedded H2 database to store the access rules. However, it can point to a
-        real persistent database by means of a simple configuration change.
-        It’s written in Java 8 & uses Spring Boot as the micro framework.
-        Producing docker image and running the app in a docker container is supported. But we’ve deployed it directly on
-        the VM as of now because of environment limitations.
-        API index page is here: http://10.104.249.30:9090/swagger-ui.html (Please hard refresh the page if you don’t see
-        any content on rare occasions. It’s a minor glitch in Swagger, the library we use to expose our API to make it
-        discoverable and consumable.
-        The APP comes with a few canned access rules (which can be viewed from the rules api) and canned users in LDAP
-        (can be viewed from the Users API).
-        New Rules can be created using Rules API.
-        You can’t create new users or modify them as this is not the responsibility of this APP. So we can only work
-        with the canned users we have in the system.
-    </p>
-
-    <br/>
-    <b>Steps to operate:</b>
-
-    <b>Data setup:</b>
-    <p>View the available users (using the users api) - This will also show the permissions these users have got.
-        Create access rules (you must use one or more permissions available on the user). Apparently we only have a
-        finite set of permissions – Use Rules API for this.
-    </p>
-    <br/>
-    <b>Transactions:</b>
-    <p>Once you have set up sufficient data, then it’s time for action!
-        Get authenticated and get a token – Use Authentication API for this (all the users have the same password and it
-        is pass)
-        Get authorised by passing in the token in the HTTP Authorisation header as part of Bearer attribute. You’ll need
-        to pass the URL that the user is trying to be authorised for in _url parameter.
-    </p>
-
-    <h2>Contributors</h2>
-    <b>
-        <ul>
-            <li>Sai Krishnamurthy - saiprkri@cisco.com</li>
-            <li>Nishit Goyal - nisgoyal@cisco.com</li>
-            <li>Rohit Sharma - rosharm3@cisco.com</li>
-        </ul>
-    </b>
+<b>A few canned access rules are already created in the system for reference and can be accessed via the rules resource: /rules</b>
+<br/>
+<h2>Contributors</h2>
+<b>
+<ul>
+<li>Sai Krishnamurthy - saiprkri@cisco.com</li>
+<li>Nishit Goyal - nisgoyal@cisco.com</li>
+<li>Rohit Sharma - rosharm3@cisco.com</li>
+</ul>
+</b>
 
 
 
