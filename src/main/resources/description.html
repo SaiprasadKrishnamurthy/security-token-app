@@ -1,39 +1,94 @@
-<h2>A simple security gateway server that performs Authentication, Authorization and Service Level Agreement (SLA) checks.</h2>
-<br />
-Here is how it works:
+<h2>A simple security gateway server that performs Authentication, Authorization and Service Level Agreement (SLA)
+    checks.</h2>
+<br/>
 
-<b>Step 1:</b>  The Administrators create access rules using the Rule Resource API. These rules govern which URI needs what permission tokens
+<b>Background</b>
+We felt a common need for Authentication & Authorisation & Service Level Agreement Checks for a lot of resources accessed via HTTP.  The idea is to simply provide these capabilities as a service that is based on industry standards, stateless, lightweight and easy to operate.
+
+<b>Authentication:</b>
+Authenticates the user against a user store and generates a token (valid for a configurable period of time). This token is generated using the industry standard Json Web Token (https://jwt.io/).
+
+<b>Authorisation:</b>
+Every request then is passed into the Authorisation API to check if the user has got the right permissions to access the protected resource and hasn’t exceeded the quota of number of requests.
+These access rules are defined by the administrator using the Rules Resource API. These govern the rules that define the access control policies of your system. The authorisation checks are purely based on the permission tokens associated with the user.
+
+
+<b>Here is a typical workflow (step by step):</b>
+
+<b>Step
+    1:</b>  The Administrators create access rules using the Rule Resource API. These rules govern which URI needs what permission tokens
 to consume using a specific HTTP verb. Also, it can additionally define how many requests (transactions) are allowed within a specific time
 window for users with specific permission tokens. This is basically the service level agreement.
 
-<b>Step 2:</b> Once the rules are defined in the system, the user is authenticated using the Authentication Resource endpoint.
+<b>Step
+    2:</b> Once the rules are defined in the system, the user is authenticated using the Authentication Resource endpoint.
 There are a lot of canned users provided as part of the APP. These users can be listed using the Users Resource API. The password
- for all the users are <b><i>pass</i></b>
+for all the users are <b><i>pass</i></b>
 
- <b>Step 3:</b> Upon successful authentication, the users will get a signed Jason Web Token (JWT).
+<b>Step 3:</b> Upon successful authentication, the users will get a signed Jason Web Token (JWT).
 
- <b>Step 4:</b> The users will then need to pass this token in the http Authorization header (using the Bearer schema) to the Authorization Resource API to get the
- authorization and SLA checks performed.
+<b>Step
+    4:</b> The users will then need to pass this token in the http Authorization header (using the Bearer schema) to the Authorization Resource API to get the
+authorization and SLA checks performed.
 
- <b>Step 5:</b> This set up uses an embedded LDAP for user store and a in-memory H2 database as a DB. However, they can be easily switched
-  to a real LDAP and DB as a matter of configuration.
+<b>Step
+    5:</b> This set up uses an embedded LDAP for user store and a in-memory H2 database as a DB. However, they can be easily switched
+to a real LDAP and DB as a matter of configuration.
 
-  <b>It's built using Java 8 + Spring Boot (as the micro framework).</b>
+<b>It's built using Java 8 + Spring Boot (as the micro framework).</b>
 
-  <b> Health and Metrics Endpoints:  Just the basic health and metrics are exposed via /health and /metrics via GET respectively.</b>
+<b> Health and Metrics Endpoints: Just the basic health and metrics are exposed via /health and /metrics via GET
+    respectively.</b>
 
 <b>HATEOAS support is provided for Rule Resource only<b/>
 
-<b>A few canned access rules are already created in the system for reference and can be accessed via the rules resource:  /rules</b>
+    <b>A few canned access rules are already created in the system for reference and can be accessed via the rules
+        resource: /rules</b>
 
-<h2>Contributors</h2>
-<b>
-    <ul>
-        <li>Sai Krishnamurthy - saiprkri@cisco.com</li>
-        <li>Nishit Goyal - nisgoyal@cisco.com</li>
-        <li>Rohit Sharma - rosharm3@cisco.com</li>
-    </ul>
-</b>
+    <br/>
+    <b>A few specific low-level notes:</b>
+    <p>This APP connects to LDAP to authenticate and get the user details – To keep it simple and self contained, we use
+        an embedded/in-memory LDAP. However, it can point to a real LDAP by means of a simple configuration change.
+        This APP connects to an in-memory/embedded H2 database to store the access rules. However, it can point to a
+        real persistent database by means of a simple configuration change.
+        It’s written in Java 8 & uses Spring Boot as the micro framework.
+        Producing docker image and running the app in a docker container is supported. But we’ve deployed it directly on
+        the VM as of now because of environment limitations.
+        API index page is here: http://10.104.249.30:9090/swagger-ui.html (Please hard refresh the page if you don’t see
+        any content on rare occasions. It’s a minor glitch in Swagger, the library we use to expose our API to make it
+        discoverable and consumable.
+        The APP comes with a few canned access rules (which can be viewed from the rules api) and canned users in LDAP
+        (can be viewed from the Users API).
+        New Rules can be created using Rules API.
+        You can’t create new users or modify them as this is not the responsibility of this APP. So we can only work
+        with the canned users we have in the system.
+    </p>
+
+    <br/>
+    <b>Steps to operate:</b>
+
+    <b>Data setup:</b>
+    <p>View the available users (using the users api) - This will also show the permissions these users have got.
+        Create access rules (you must use one or more permissions available on the user). Apparently we only have a
+        finite set of permissions – Use Rules API for this.
+    </p>
+    <br/>
+    <b>Transactions:</b>
+    <p>Once you have set up sufficient data, then it’s time for action!
+        Get authenticated and get a token – Use Authentication API for this (all the users have the same password and it
+        is pass)
+        Get authorised by passing in the token in the HTTP Authorisation header as part of Bearer attribute. You’ll need
+        to pass the URL that the user is trying to be authorised for in _url parameter.
+    </p>
+
+    <h2>Contributors</h2>
+    <b>
+        <ul>
+            <li>Sai Krishnamurthy - saiprkri@cisco.com</li>
+            <li>Nishit Goyal - nisgoyal@cisco.com</li>
+            <li>Rohit Sharma - rosharm3@cisco.com</li>
+        </ul>
+    </b>
 
 
 
